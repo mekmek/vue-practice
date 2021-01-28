@@ -1,39 +1,48 @@
 <template>
-  <div>
-    <div class="title">
-      <span class="step">STEP1</span>
-      <span class="material-icons">account_box</span>お客様の情報を入力してください
-    </div>
-    <div class="question-area">
-      <div class="question">
-        <p>性別</p>
-        <div class="answer">
-          <label><input type="radio" v-model="sex" value="man">男性</label>
-          <label><input type="radio" v-model="sex" value="woman">女性</label>
+  <transition>
+    <div>
+      <div class="container">
+        <div class="title">
+          <span class="step">STEP1</span>
+          <span class="material-icons">account_box</span>お客様の情報を入力してください
+        </div>
+        <div class="question-area">
+          <div class="question">
+            <p>性別</p>
+            <div class="answer">
+              <label><input type="radio" v-model="sex" value="man">男性</label>
+              <label><input type="radio" v-model="sex" value="woman">女性</label>
+            </div>
+          </div>
+          <div class="question">
+            <p>生年月日</p>
+            <div class="answer">
+              <select v-model="year">
+                <option v-for="item in yearList" :value="item.val" :key="item.val">{{ item.key }}</option> 
+              </select>
+              年
+              <select v-model="month">
+                <option v-for="val in monthList" :value="val" :key="val">{{ val }}</option> 
+              </select>
+              月
+              <select v-model="day">
+                <option v-for="val in dayList" :value="val" :key="val">{{ val }}</option> 
+              </select>
+              日
+            </div>
+          </div>
         </div>
       </div>
-      <div class="question">
-        <p>生年月日</p>
-        <div class="answer">
-          <select v-model="year">
-            <option v-for="(val, idx) in yearList" :value="idx+1968" :key="idx">{{ val }}</option> 
-          </select>
-          年
-          <select v-model="month">
-            <option v-for="val in monthList" :value="val" :key="val">{{ val }}</option> 
-          </select>
-          月
-          <select v-model="day">
-            <option v-for="val in dayList" :value="val" :key="val">{{ val }}</option> 
-          </select>
-          日
-        </div>
+      <div class="btn-area">
+        <button @click="next">次へ進む</button>
       </div>
     </div>
-  </div>
+  </transition>
 </template>
 
 <script>
+import { createYearList, createMonthList } from '../helpers/definition.js';
+
 export default {
   name: 'Basic',
   data: function() {
@@ -42,22 +51,12 @@ export default {
       year: 1991,
       month: 1,
       day: 1,
-      yearArr: Array(33),
-      monthArr: Array(12),
+      yearList: createYearList(),
+      monthList: createMonthList(),
       dayArr: Array(31)
     }
   },
   computed: {
-    yearList: function() {
-      return [...this.yearArr].map((_, idx) => {
-        let str = idx < 21 ? '昭和' : '平成';
-        let num = idx < 21 ? idx + 43 : idx - 20;
-        return `${idx + 1968}年 (${str}${num})`; 
-      });
-    },
-    monthList: function() {
-      return [...this.monthArr].map((_, idx) => idx + 1);
-    },
     dayList: function() {
       return [...this.dayArr].map((_, idx) => idx + 1);
     }
@@ -71,6 +70,14 @@ export default {
         days = 31;
       }
       this.dayArr = Array(days);
+    }
+  },
+  methods: {
+    next: function() {
+      this.$emit('changeComp', 1);
+    },
+    back: function() {
+      this.$emit('changeComp', -1);
     }
   }
 }
@@ -99,5 +106,17 @@ select:nth-child(2) {
 
 select:nth-child(3) {
   margin-left: 10px;
+}
+
+.v-enter {
+  opacity: 0;
+}
+
+.v-enter-to {
+  opacity: 1;
+}
+
+.v-enter-active {
+  transition: opacity 1s;
 }
 </style>

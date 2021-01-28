@@ -1,14 +1,8 @@
 <template>
   <div id="app">
-    <div class="container">
-      <keep-alive>
-        <component :is="currentComp"></component>
-      </keep-alive>
-    </div>
-    <div class="btn-area">
-      <button @click="back" :hidden="listIndex == 0">前へ戻る</button>
-      <button @click="next">次へ進む</button>
-    </div>
+    <keep-alive>
+      <component :is="currentComp" @changeComp="changeComp"></component>
+    </keep-alive>
   </div>
 </template>
 
@@ -36,12 +30,8 @@ export default {
     }
   },
   methods: {
-    next: function() {
-      this.listIndex++;
-      if (this.listIndex > this.compList.length - 1) this.listIndex = 0;  // 暫定処理
-    },
-    back: function() {
-      this.listIndex--;
+    changeComp: function(e) {
+      this.listIndex += e;
     }
   }
 }
