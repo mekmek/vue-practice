@@ -10,8 +10,8 @@
           <div class="question">
             <p>性別</p>
             <div class="answer">
-              <label><input type="radio" v-model="sex" value="man">男性</label>
-              <label><input type="radio" v-model="sex" value="woman">女性</label>
+              <label><input type="radio" v-model="sex" value="男性">男性</label>
+              <label><input type="radio" v-model="sex" value="女性">女性</label>
             </div>
           </div>
           <div class="question">
@@ -47,16 +47,44 @@ export default {
   name: 'Basic',
   data: function() {
     return {
-      sex: '',
-      year: 1991,
-      month: 1,
-      day: 1,
       yearList: createYearList(),
       monthList: createMonthList(),
       dayArr: Array(31)
     }
   },
   computed: {
+    sex: {
+      get() {
+        return this.$store.state.sex;
+      },
+      set(value) {
+        this.$store.commit('updateSex', value)
+      }
+    },
+    year: {
+      get() {
+        return this.$store.state.year;
+      },
+      set(value) {
+        this.$store.commit('updateYear', value)
+      }
+    },
+    month: {
+      get() {
+        return this.$store.state.month;
+      },
+      set(value) {
+        this.$store.commit('updateMonth', value)
+      }
+    },
+    day: {
+      get() {
+        return this.$store.state.day;
+      },
+      set(value) {
+        this.$store.commit('updateDay', value)
+      }
+    },
     dayList: function() {
       return [...this.dayArr].map((_, idx) => idx + 1);
     }

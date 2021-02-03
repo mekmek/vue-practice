@@ -10,16 +10,16 @@
           <div class="question">
             <p>現在、生命保険に加入されていますか？</p>
             <div class="answer">
-              <label><input type="radio" v-model="hasInsurance" value="yes">はい</label>
-              <label><input type="radio" v-model="hasInsurance" value="no">いいえ</label>
+              <label><input type="radio" v-model="hasInsurance" value="はい">はい</label>
+              <label><input type="radio" v-model="hasInsurance" value="いいえ">いいえ</label>
             </div>
           </div>
           <transition>
             <div class="question" v-show="hasInsurance">
               <p>現在、入院中ですか？または、最近3ヶ月以内に医師の診察・検査の結果、入院・手術をすすめられたことはありますか？</p>
               <div class="answer">
-                <label><input type="radio" v-model="inHospital" value="yes">はい</label>
-                <label><input type="radio" v-model="inHospital" value="no">いいえ</label>
+                <label><input type="radio" v-model="inHospital" value="はい">はい</label>
+                <label><input type="radio" v-model="inHospital" value="いいえ">いいえ</label>
               </div>
             </div>
           </transition>
@@ -27,8 +27,8 @@
             <div class="question" v-show="inHospital">
               <p>過去5年以内に、病気やけがで、手術をうけたことまたは継続して7日以上の入院をしたことがありますか？</p>
               <div class="answer">
-                <label><input type="radio" v-model="hadSurgery" value="yes">はい</label>
-                <label><input type="radio" v-model="hadSurgery" value="no">いいえ</label>
+                <label><input type="radio" v-model="hadSurgery" value="はい">はい</label>
+                <label><input type="radio" v-model="hadSurgery" value="いいえ">いいえ</label>
               </div>
             </div>
           </transition>
@@ -45,11 +45,30 @@
 <script>
 export default {
   name: 'Survay',
-  data: function() {
-    return {
-      hasInsurance: '',
-      inHospital: '',
-      hadSurgery: ''
+  computed: {
+    hasInsurance: {
+      get() {
+        return this.$store.state.hasInsurance;
+      },
+      set(value) {
+        this.$store.commit('updateHasInsurance', value)
+      }
+    },
+    inHospital: {
+      get() {
+        return this.$store.state.inHospital;
+      },
+      set(value) {
+        this.$store.commit('updateInHospital', value)
+      }
+    },
+    hadSurgery: {
+      get() {
+        return this.$store.state.hadSurgery;
+      },
+      set(value) {
+        this.$store.commit('updateHadSurgery', value)
+      }
     }
   },
   methods: {

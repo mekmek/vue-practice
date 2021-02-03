@@ -15,7 +15,7 @@
       </div>
       <div class="btn-area">
         <button @click="back">前へ戻る</button>
-        <button>次へ進む</button>
+        <button @click="next">次へ進む</button>
       </div>
     </div>
   </transition>
@@ -24,14 +24,22 @@
 <script>
 export default {
   name: 'Consultation',
-  data: function() {
-    return {
-      consultation: ''
+  computed: {
+    consultation: {
+      get() {
+        return this.$store.state.consultation;
+      },
+      set(value) {
+        this.$store.commit('updateConsultation', value);
+      }
     }
   },
   methods: {
     back: function() {
       this.$emit('changeComp', -1);
+    },
+    next: function() {
+      this.$emit('changeComp', 1);
     }
   }
 }

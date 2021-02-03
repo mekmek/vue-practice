@@ -10,17 +10,19 @@
 import Basic from './components/Basic.vue'
 import Survay from './components/Survay.vue'
 import Consultation from './components/Consultation.vue'
+import Confirm from './components/Confirm.vue'
 
 export default {
   name: 'App',
   components: {
     Basic,
     Survay,
-    Consultation
+    Consultation,
+    Confirm
   },
   data: function() {
     return {
-      compList: ['basic', 'survay', 'consultation'],
+      compList: ['basic', 'survay', 'consultation', 'confirm'],
       listIndex: 0
     }
   },
