@@ -48,7 +48,7 @@ export default {
   computed: {
     hasInsurance: {
       get() {
-        return this.$store.state.hasInsurance;
+        return this.$store.getters.hasInsurance;
       },
       set(value) {
         this.$store.commit('updateHasInsurance', value)
@@ -56,7 +56,7 @@ export default {
     },
     inHospital: {
       get() {
-        return this.$store.state.inHospital;
+        return this.$store.getters.inHospital;
       },
       set(value) {
         this.$store.commit('updateInHospital', value)
@@ -64,7 +64,7 @@ export default {
     },
     hadSurgery: {
       get() {
-        return this.$store.state.hadSurgery;
+        return this.$store.getters.hadSurgery;
       },
       set(value) {
         this.$store.commit('updateHadSurgery', value)

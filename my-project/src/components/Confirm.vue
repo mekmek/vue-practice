@@ -42,23 +42,18 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'Confirm',
-  computed: {
-    ...mapState([
-      'sex',
-      'birth',
-      'hasInsurance',
-      'inHospital',
-      'hadSurgery',
-      'consultation'
-    ]),
-    birthday() {
-      return this.$store.getters.birthday;
-    }
-  },
+  computed: mapGetters([
+    'sex',
+    'birthday',
+    'hasInsurance',
+    'inHospital',
+    'hadSurgery',
+    'consultation'
+  ]),
   methods: {
     back() {
       this.$emit('changeComp', -1);

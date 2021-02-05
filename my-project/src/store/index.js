@@ -41,6 +41,30 @@ export default new Vuex.Store({
     }
   },
   getters: {
+    sex(state) {
+      return state.sex;
+    },
+    year(state) {
+      return state.year;
+    },
+    month(state) {
+      return state.month;
+    },
+    day(state) {
+      return state.day;
+    },
+    hasInsurance(state) {
+      return state.hasInsurance;
+    },
+    inHospital(state) {
+      return state.inHospital;
+    },
+    hadSurgery(state) {
+      return state.hadSurgery;
+    },
+    consultation(state) {
+      return state.consultation;
+    },
     birthday(state) {
       let y = state.year;
       let m = state.month;
